@@ -54,7 +54,7 @@ class MainActivity2 : AppCompatActivity() {
             } else {
                 val builder = StringBuilder()
                 for ((index, song) in songList.withIndex()) {
-                    builder.append("🎵 Song ${index + 1}:\n")
+                    builder.append("Song ${index + 1}:\n")
                     builder.append("Name: ${song.songName}\n")
                     builder.append("Artist: ${song.artistName}\n")
                     builder.append("Rating: ${song.rating}\n")
