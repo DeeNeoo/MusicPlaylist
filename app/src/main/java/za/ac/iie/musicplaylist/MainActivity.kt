@@ -44,6 +44,8 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        //button to prompt user to enter song details
+
 
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
