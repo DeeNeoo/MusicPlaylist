@@ -1,11 +1,14 @@
 package za.ac.iie.musicplaylist
 
+import java.io.Serializable
+
 data class Song(
     val songName: String,
     val artistName: String,
     val rating: Int,
     val comment: String
-)
+) : Serializable
+
 class ArrayList{
     private val songs = ArrayList<Song>()
 

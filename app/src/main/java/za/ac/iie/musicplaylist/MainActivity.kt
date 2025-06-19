@@ -1,4 +1,4 @@
-package za.ac.iie.musicplaylist
+package  za.ac.iie.musicplaylist
 
 import android.content.Intent
 import android.os.Bundle
@@ -18,8 +18,7 @@ import androidx.core.view.WindowInsetsCompat
 class MainActivity : AppCompatActivity() {
 
     //Parallel arrays for the songs, artists, ratings, and comments
-
-    private val songList = mutableListOf<Song>()
+    private val songList = ArrayList<Song>()
 
     private val songName = ArrayList<String>()
     private val artistName = ArrayList<String>()
@@ -46,7 +45,9 @@ class MainActivity : AppCompatActivity() {
         //button to move to the second screen
         btnNext.setOnClickListener {
             val intent = Intent(this, MainActivity2::class.java)
+            intent.putExtra("songList", ArrayList(songList))
             startActivity(intent)
+
         }
 
         //button to prompt user to enter song details
@@ -66,11 +67,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun addSampleSongs() {
-        songList.add(Song("Shape of You", "Ed Sheeran", 5, "Great lyrics"))
-        songList.add(Song("Blinding Lights", "The Weeknd", 4, "A masterpiece"))
-        songList.add(Song("Levitating", "Dua Lipa", 5, "Super fun."))
-        songList.add(Song("Bohemian Rhapsody", "Queen", 5, "A masterpiece."))
-        songList.add(Song("Bad Guy", "Billie Eilish", 3, "Very unique"))
+        songList.add(Song("Alternative intro", "Lucki", 5, "Great"))
+        songList.add(Song("LVL", "Rocky", 4, "A masterpiece"))
+        songList.add(Song("Stoned", "Lucki", 5, "Great"))
+        songList.add(Song("NDA", "Billie", 4, "A masterpiece."))
+        songList.add(Song("The hills", "The Weeknd", 5, "Great"))
     }
 
     private fun showAddSongDialog() {
