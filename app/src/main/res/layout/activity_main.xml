@@ -37,51 +37,15 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <EditText
-        android:id="@+id/edtSongName"
+    <TextView
+        android:id="@+id/txtStart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="185dp"
-        android:layout_marginBottom="13dp"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Enter song title:"
-        app:layout_constraintBottom_toTopOf="@+id/edtArtistName"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <EditText
-        android:id="@+id/edtArtistName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="185dp"
-        android:layout_marginBottom="41dp"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Enter artist name:"
-        app:layout_constraintBottom_toTopOf="@+id/edtRating"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <EditText
-        android:id="@+id/edtRating"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="185dp"
-        android:layout_marginBottom="30dp"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Rating (1-5):"
-        app:layout_constraintBottom_toTopOf="@+id/edtComment"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <EditText
-        android:id="@+id/edtComment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="184dp"
-        android:layout_marginBottom="128dp"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Comment"
+        android:layout_marginEnd="124dp"
+        android:layout_marginBottom="96dp"
+        android:text="Click the Add button to start"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/btnAdd"
         app:layout_constraintEnd_toEndOf="parent" />
 
