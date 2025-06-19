@@ -33,6 +33,20 @@ class MainActivity2 : AppCompatActivity() {
             startActivity(intent)
         }
 
+        btnCalculate.setOnClickListener {
+            if (songName.isEmpty()) {
+                Toast.makeText(this, "No songs to calculate.", Toast.LENGTH_SHORT).show()
+            } else {
+                val average = rating.sum().toDouble() / rating.size
+                AlertDialog.Builder(this)
+                    .setTitle("Average Rating")
+                    .setMessage("Average Rating: %.2f".format(average))
+                    .setPositiveButton("OK", null)
+                    .show()
+            }
+        }
+
+
         btnDisplay.setOnClickListener {
             if (songName.isEmpty()) {
                 Toast.makeText(this, "No songs to display.", Toast.LENGTH_SHORT).show()

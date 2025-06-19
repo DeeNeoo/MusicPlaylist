@@ -18,6 +18,9 @@ import androidx.core.view.WindowInsetsCompat
 class MainActivity : AppCompatActivity() {
 
     //Parallel arrays for the songs, artists, ratings, and comments
+
+    private val songList = mutableListOf<Song>()
+
     private val songName = ArrayList<String>()
     private val artistName = ArrayList<String>()
     private val rating = ArrayList<Int>()
@@ -51,11 +54,23 @@ class MainActivity : AppCompatActivity() {
             showAddSongDialog()
         }
 
+        // Add sample songs here
+        addSampleSongs()
+
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+    }
+
+    private fun addSampleSongs() {
+        songList.add(Song("Shape of You", "Ed Sheeran", 5, "Great lyrics"))
+        songList.add(Song("Blinding Lights", "The Weeknd", 4, "A masterpiece"))
+        songList.add(Song("Levitating", "Dua Lipa", 5, "Super fun."))
+        songList.add(Song("Bohemian Rhapsody", "Queen", 5, "A masterpiece."))
+        songList.add(Song("Bad Guy", "Billie Eilish", 3, "Very unique"))
     }
 
     private fun showAddSongDialog() {
