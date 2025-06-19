@@ -41,13 +41,13 @@ class MainActivity2 : AppCompatActivity() {
         val txtAverage = findViewById<TextView>(R.id.txtAverage)
 
 
-        // ✅ Return to MainActivity
+        //Return to MainActivity
         btnReturn.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
 
-        // ✅ Display Song List
+        //Display Song List
         btnDisplay.setOnClickListener {
             if (songList.isEmpty()) {
                 Toast.makeText(this, "No songs to display.", Toast.LENGTH_SHORT).show()
@@ -64,13 +64,13 @@ class MainActivity2 : AppCompatActivity() {
             }
         }
 
-        // ✅ Long press on Display to add a song
+        //Long press on Display to add a song
         btnDisplay.setOnLongClickListener {
             showAddSongDialog()
             true
         }
 
-        // ✅ Calculate average rating
+        // Calculate average rating
         btnCalculate.setOnClickListener {
             if (songList.isEmpty()) {
                 Toast.makeText(this, "No songs to calculate.", Toast.LENGTH_SHORT).show()
@@ -99,7 +99,7 @@ class MainActivity2 : AppCompatActivity() {
         }
     }
 
-    // ✅ Add Song Dialog
+    // Add Song Dialog
     private fun showAddSongDialog() {
         val layout = LinearLayout(this)
         layout.orientation = LinearLayout.VERTICAL

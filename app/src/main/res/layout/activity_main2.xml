@@ -42,9 +42,8 @@
       android:id="@+id/txtDisplayResults"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginEnd="206dp"
-      android:layout_marginBottom="399dp"
-      android:text="TextView"
+      android:layout_marginEnd="312dp"
+      android:layout_marginBottom="204dp"
       app:layout_constraintBottom_toTopOf="@+id/btnReturn"
       app:layout_constraintEnd_toEndOf="parent" />
 
@@ -52,9 +51,8 @@
       android:id="@+id/txtAverage"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginEnd="206dp"
-      android:layout_marginBottom="327dp"
-      android:text="TextView"
+      android:layout_marginEnd="212dp"
+      android:layout_marginBottom="152dp"
       app:layout_constraintBottom_toTopOf="@+id/btnReturn"
       app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

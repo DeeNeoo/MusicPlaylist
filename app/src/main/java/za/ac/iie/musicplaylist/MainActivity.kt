@@ -68,9 +68,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun addSampleSongs() {
         songList.add(Song("Alternative intro", "Lucki", 5, "Great"))
-        songList.add(Song("LVL", "Rocky", 4, "A masterpiece"))
+        songList.add(Song("LVL", "Rocky", 4, "Masterpiece"))
         songList.add(Song("Stoned", "Lucki", 5, "Great"))
-        songList.add(Song("NDA", "Billie", 4, "A masterpiece."))
+        songList.add(Song("NDA", "Billie", 4, "Masterpiece."))
         songList.add(Song("The hills", "The Weeknd", 5, "Great"))
     }
 
