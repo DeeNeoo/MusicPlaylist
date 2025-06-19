@@ -30,7 +30,8 @@ class MainActivity2 : AppCompatActivity() {
 
         // Retrieve the song list from MainActivity
         @Suppress("UNCHECKED_CAST")
-        songList = (intent.getSerializableExtra("SONGS") as? ArrayList<Song> ?: ArrayList()) as ArrayList<Song>
+        songList = (intent.getSerializableExtra("songList") as? ArrayList<Song> ?: ArrayList()) as ArrayList<Song>
+
 
         val btnDisplay = findViewById<Button>(R.id.btnDisplay)
         val btnCalculate = findViewById<Button>(R.id.btnCalculate)
@@ -40,115 +41,102 @@ class MainActivity2 : AppCompatActivity() {
         val txtAverage = findViewById<TextView>(R.id.txtAverage)
 
 
+        // ✅ Return to MainActivity
         btnReturn.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
 
+        // ✅ Display Song List
+        btnDisplay.setOnClickListener {
+            if (songList.isEmpty()) {
+                Toast.makeText(this, "No songs to display.", Toast.LENGTH_SHORT).show()
+            } else {
+                val builder = StringBuilder()
+                for ((index, song) in songList.withIndex()) {
+                    builder.append("🎵 Song ${index + 1}:\n")
+                    builder.append("Name: ${song.songName}\n")
+                    builder.append("Artist: ${song.artistName}\n")
+                    builder.append("Rating: ${song.rating}\n")
+                    builder.append("Comment: ${song.comment}\n\n")
+                }
+                txtDisplayResults.text = builder.toString()
+            }
+        }
+
+        // ✅ Long press on Display to add a song
+        btnDisplay.setOnLongClickListener {
+            showAddSongDialog()
+            true
+        }
+
+        // ✅ Calculate average rating
         btnCalculate.setOnClickListener {
             if (songList.isEmpty()) {
                 Toast.makeText(this, "No songs to calculate.", Toast.LENGTH_SHORT).show()
             } else {
                 val average = songList.map { it.rating }.average()
+                txtAverage.text = "Average Rating: %.2f".format(average)
                 AlertDialog.Builder(this)
                     .setTitle("Average Rating")
                     .setMessage("Average Rating: %.2f".format(average))
                     .setPositiveButton("OK", null)
                     .show()
             }
-
-
-            btnDisplay.setOnClickListener {
-                if (songList.isEmpty()) {
-                    Toast.makeText(this, "No songs to display.", Toast.LENGTH_SHORT).show()
-                } else {
-                    val builder = StringBuilder()
-                    for ((index, song) in songList.withIndex()) {
-                        builder.append("🎵 Song ${index + 1}:\n")
-                        builder.append("Name: ${song.songName}\n")
-                        builder.append("Artist: ${song.artistName}\n")
-                        builder.append("Rating: ${song.rating}\n")
-                        builder.append("Comment: ${song.comment}\n\n")
-                    }
-                    txtDisplayResults.text = builder.toString()
-                }
-            // Open dialog when user long-presses the display button (to simulate adding a song)
-            btnDisplay.setOnLongClickListener {
-                showAddSongDialog()
-                true
-                }
-
-
-                ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-                    val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-                    v.setPadding(
-                        systemBars.left,
-                        systemBars.top,
-                        systemBars.right,
-                        systemBars.bottom
-                    )
-                    insets
-                }
-            }
-
-            fun showAddSongDialog() {
-                val layout = LinearLayout(this)
-                layout.orientation = LinearLayout.VERTICAL
-                layout.setPadding(50, 40, 50, 10)
-
-                val inputName = EditText(this)
-                inputName.hint = "Song Name"
-                layout.addView(inputName)
-
-                val inputArtist = EditText(this)
-                inputArtist.hint = "Artist Name"
-                layout.addView(inputArtist)
-
-                val inputRating = EditText(this)
-                inputRating.hint = "Rating (1-5)"
-                inputRating.inputType = android.text.InputType.TYPE_CLASS_NUMBER
-                layout.addView(inputRating)
-
-                val inputComment = EditText(this)
-                inputComment.hint = "Comment"
-                layout.addView(inputComment)
-
-                AlertDialog.Builder(this)
-                    .setTitle("Add Song")
-                    .setView(layout)
-                    .setPositiveButton("Add") { _, _ ->
-                        val name = inputName.text.toString().trim()
-                        val artist = inputArtist.text.toString().trim()
-                        val ratingValue = inputRating.text.toString().toIntOrNull() ?: -1
-                        val commentText = inputComment.text.toString().trim()
-
-                        if (name.isNotEmpty() && artist.isNotEmpty() && ratingValue in 1..5) {
-                            songName.add(name)
-                            artistName.add(artist)
-                            rating.add(ratingValue)
-                            comment.add(commentText)
-
-                            Toast.makeText(this, "Song added", Toast.LENGTH_SHORT).show()
-                        } else {
-                            Toast.makeText(
-                                this,
-                                "Invalid input. Please try again.",
-                                Toast.LENGTH_SHORT
-                            )
-                                .show()
-                        }
-                    }
-                    .setNegativeButton("Cancel", null)
-                    .show()
-            }
         }
 
-        fun showAddSongDialog() {
-            TODO("Not yet implemented")
+
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(
+                systemBars.left,
+                systemBars.top,
+                systemBars.right,
+                systemBars.bottom
+            )
+            insets
         }
     }
 
+    // ✅ Add Song Dialog
     private fun showAddSongDialog() {
-        TODO("Not yet implemented")
+        val layout = LinearLayout(this)
+        layout.orientation = LinearLayout.VERTICAL
+        layout.setPadding(50, 40, 50, 10)
+
+        val inputName = EditText(this).apply { hint = "Song Name" }
+        val inputArtist = EditText(this).apply { hint = "Artist Name" }
+        val inputRating = EditText(this).apply {
+            hint = "Rating (1-5)"
+            inputType = android.text.InputType.TYPE_CLASS_NUMBER
+        }
+        val inputComment = EditText(this).apply { hint = "Comment" }
+
+        layout.apply {
+            addView(inputName)
+            addView(inputArtist)
+            addView(inputRating)
+            addView(inputComment)
+        }
+
+        AlertDialog.Builder(this)
+            .setTitle("Add Song")
+            .setView(layout)
+            .setPositiveButton("Add") { _, _ ->
+                val name = inputName.text.toString().trim()
+                val artist = inputArtist.text.toString().trim()
+                val ratingValue = inputRating.text.toString().toIntOrNull() ?: -1
+                val commentText = inputComment.text.toString().trim()
+
+                if (name.isNotEmpty() && artist.isNotEmpty() && ratingValue in 1..5) {
+                    songList.add(Song(name, artist, ratingValue, commentText))
+                    Toast.makeText(this, "Song added", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this, "Invalid input. Please try again.", Toast.LENGTH_SHORT).show()
+                }
+            }
+            .setNegativeButton("Cancel", null)
+            .show()
     }
 }
